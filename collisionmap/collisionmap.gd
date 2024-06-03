@@ -11,11 +11,8 @@ var size
 var amplitude:float = ProjectSettings.get_setting("shader_globals/amplitude").value
 
 func _ready():
-	var texture = NoiseTexture2D.new()
-	texture.seamless = true
-	var noise = FastNoiseLite.new()
-	noise.seed = ProjectSettings.get_setting("shader_globals/seed").value
-	texture.noise = noise
+	var terrain = get_parent()
+	var texture = terrain.texture
 	await texture.changed
 	image = texture.get_image()
 	size = image.get_width()

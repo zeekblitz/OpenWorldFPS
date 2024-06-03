@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://croar0kebe37e"]
+[gd_scene load_steps=9 format=3 uid="uid://croar0kebe37e"]
 
 [ext_resource type="PackedScene" uid="uid://b11lm75hfbnky" path="res://clipmap/clipmap.tscn" id="2_56t03"]
+[ext_resource type="Script" path="res://Terrain.gd" id="2_gj4qr"]
 [ext_resource type="PackedScene" uid="uid://bu3vtmwnoul1u" path="res://player/player_character.tscn" id="2_vccuw"]
 [ext_resource type="PackedScene" uid="uid://c7xublrnupds4" path="res://collisionmap/collisionmap.tscn" id="3_pjk5k"]
 [ext_resource type="PackedScene" uid="uid://d2esxayut1lwe" path="res://clipmap/clipmap_partition.tscn" id="4_3eu7i"]
@@ -38,6 +39,7 @@ speed = 7.5
 gravity_enabled = true
 
 [node name="Terrain" type="StaticBody3D" parent="."]
+script = ExtResource("2_gj4qr")
 
 [node name="Collisionmap" parent="Terrain" node_paths=PackedStringArray("physics_body") instance=ExtResource("3_pjk5k")]
 physics_body = NodePath("../../PlayerCharacter")
