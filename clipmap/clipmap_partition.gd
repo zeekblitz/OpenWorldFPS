@@ -1,16 +1,12 @@
 extends MeshInstance3D
 
+var texture : NoiseTexture2D
 var x = 0
 var z = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var texture = NoiseTexture2D.new()
-	texture.seamless = true
-	var noise = FastNoiseLite.new()
-	noise.seed = ProjectSettings.get_setting("shader_globals/seed").value
-	texture.noise = noise
-	#await texture.changed
+	
 	print("part x = %d z = %d" % [x, z])
 	var material : ShaderMaterial = self.get_active_material(0)
 	material.set_shader_parameter("heightmap", texture)

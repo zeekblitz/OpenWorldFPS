@@ -4,3 +4,5 @@ res://clipmap/clipmap.tscn
 res://collisionmap/collisionmap.tscn
 res://clipmap/clipmap_partition.tscn
 res://player/player_character.tscn
+res://clipmap/clipmap.gd
+res://clipmap/clipmap_partition.gd
