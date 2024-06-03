@@ -1,5 +1,5 @@
 extends CharacterBody3D
-@export var speed = 10
+@export var speed = 10.0
 @export var jump_velocity = 4.5
 @export var gravity_enabled = false
 var look_sensitivity = ProjectSettings.get_setting("player/look_sensitivity")

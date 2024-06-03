@@ -1,6 +1,6 @@
 shader_type spatial;
 
-global uniform sampler2D heightmap;
+uniform sampler2D heightmap;
 global uniform sampler2D normalmap;
 global uniform float amplitude;
 global uniform vec3 clipmap_position;

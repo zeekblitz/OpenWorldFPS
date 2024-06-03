@@ -1,0 +1,6 @@
+res://main.tscn
+res://clipmap/clipmap.gdshader
+res://clipmap/clipmap.tscn
+res://collisionmap/collisionmap.tscn
+res://clipmap/clipmap_partition.tscn
+res://player/player_character.tscn
