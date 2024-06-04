@@ -1,6 +1,6 @@
 extends Node3D
 
-var PARTITION = preload("res://clipmap/clipmap_partition.tscn")
+var PARTITION = preload("res://terrain/clipmap/clipmap_partition.tscn")
 @export var distance:int = 8
 
 @export var player_character:Node3D

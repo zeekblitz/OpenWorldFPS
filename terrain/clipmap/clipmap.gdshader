@@ -1,7 +1,8 @@
 shader_type spatial;
+//render_mode wireframe;
 
 uniform sampler2D heightmap;
-global uniform sampler2D normalmap;
+//global uniform sampler2D normalmap;
 global uniform float amplitude;
 global uniform vec3 clipmap_position;
 global uniform float clipmap_partition_length;
@@ -10,6 +11,8 @@ global uniform float lod_step;
 varying vec2 normalmap_position;
 varying vec3 dev_albedo;
 
+varying vec3 vert;
+
 float true_round(float value){
 	return floor(value + 0.5);
 }
@@ -17,6 +20,26 @@ float true_round(float value){
 float get_height(vec3 world_vertex){
 	vec2 heightmap_position  = (world_vertex.xz + 0.5)/float(textureSize(heightmap,0).x);
 	return texture(heightmap, heightmap_position ).r * amplitude;
+}
+
+vec3 get_normal(vec3 vertex, float adjacent_distance){
+	vec3 west_vert = vertex + vec3(adjacent_distance, 0, 0);
+	west_vert.y = get_height(west_vert);
+	vec3 north_vert = vertex + vec3(0, 0, adjacent_distance);
+	north_vert.y = get_height(north_vert);
+	return normalize(
+		cross(
+			north_vert - vertex,
+			west_vert - vertex
+		)
+	);
+}
+
+vec3 to_normalmap(vec3 n){
+	n*=vec3(1.0,1.0,-1.0);
+	n = n/2.0+0.5;
+	n = vec3(n.x,n.z,n.y);
+	return n;
 }
 
 void vertex(){
@@ -64,9 +87,16 @@ void vertex(){
 		), 
 		ceil(fraction.z)
 	);
+	
+	//NORMAL = get_normal(VERTEX, float(subdivision_length));
+	vert = world_vertex;
 }
 
 void fragment() {
-	NORMAL_MAP = texture(normalmap,normalmap_position).rgb;
+	vec3 interpolated_vert = vert;
+	interpolated_vert.y = get_height(vert);
+	vec3 normal = get_normal(interpolated_vert, 1.0);
+	NORMAL_MAP = to_normalmap(normal);
+	//NORMAL_MAP = texture(normalmap,normalmap_position).rgb;
 	//ALBEDO = dev_albedo;
 }

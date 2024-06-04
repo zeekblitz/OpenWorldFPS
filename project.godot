@@ -59,13 +59,9 @@ look_sensitivity=0.01
 
 [shader_globals]
 
-normalmap={
-"type": "sampler2D",
-"value": "res://heightmap/normalmap.png"
-}
 amplitude={
 "type": "float",
-"value": 32.0
+"value": 16.0
 }
 clipmap_partition_length={
 "type": "float",

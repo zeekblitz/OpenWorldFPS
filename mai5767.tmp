@@ -35,7 +35,7 @@ shadow_enabled = true
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_vccuw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
-gravity_enabled = true
+speed = 20.0
 
 [node name="Terrain" type="StaticBody3D" parent="."]
 script = ExtResource("2_gj4qr")
@@ -46,5 +46,4 @@ physics_body = NodePath("../../PlayerCharacter")
 [node name="Clipmap" parent="Terrain" node_paths=PackedStringArray("player_character") instance=ExtResource("2_56t03")]
 player_character = NodePath("../../PlayerCharacter")
 
-[node name="Partition" parent="Terrain/Clipmap" instance=ExtResource("4_3eu7i")]
-skeleton = NodePath("../../../..")
+[node name="Partition" parent="." instance=ExtResource("4_3eu7i")]
