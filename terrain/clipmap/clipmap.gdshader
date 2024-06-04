@@ -2,7 +2,6 @@ shader_type spatial;
 //render_mode wireframe;
 
 uniform sampler2D heightmap;
-//global uniform sampler2D normalmap;
 global uniform float amplitude;
 global uniform vec3 clipmap_position;
 global uniform float clipmap_partition_length;
@@ -46,15 +45,18 @@ void vertex(){
 	dev_albedo = vec3(1);
 	
 	vec3 world_vertex = VERTEX + MODEL_MATRIX[3].xyz;
-	normalmap_position = (world_vertex.xz + 0.5)/float(textureSize(heightmap,0).x);
+	normalmap_position = (world_vertex.xz + 0.5) / 
+							float(textureSize(heightmap,0).x);
 	VERTEX.y = get_height(world_vertex);
 	
 	vec3 clipmap_vertex = world_vertex - clipmap_position;
-	float lod = true_round(max(abs(clipmap_vertex.x), abs(clipmap_vertex.z))/clipmap_partition_length) * lod_step;
+	float lod = true_round(max(abs(clipmap_vertex.x), 
+				abs(clipmap_vertex.z))/clipmap_partition_length) * lod_step;
 	
 	float subdivision_length = min(pow(2,lod), clipmap_partition_length);
 	
-	vec3 fraction = fract((VERTEX + clipmap_partition_length / 2.0) / subdivision_length);
+	vec3 fraction = 
+		fract((VERTEX + clipmap_partition_length / 2.0) / subdivision_length);
 	
 	//if (fraction.x == 0.5){
 		//dev_albedo = vec3(1,0,0);

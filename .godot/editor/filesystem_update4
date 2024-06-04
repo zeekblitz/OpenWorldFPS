@@ -1,14 +1,6 @@
 res://main.tscn
-res://clipmap/clipmap.gdshader
-res://clipmap/clipmap.tscn
-res://collisionmap/collisionmap.tscn
-res://clipmap/clipmap_partition.tscn
-res://player/player_character.tscn
-res://clipmap/clipmap.gd
-res://Terrain.gd
-res://clipmap/clipmap_partition.gd
 res://terrain/clipmap/clipmap.gdshader
 res://terrain/clipmap/clipmap.tscn
 res://terrain/collisionmap/collisionmap.tscn
 res://terrain/clipmap/clipmap_partition.tscn
-res://terrain/clipmap/clipmap.gd
+res://player/player_character.tscn
