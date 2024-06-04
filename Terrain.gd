@@ -9,5 +9,3 @@ func _init():
 	noise = FastNoiseLite.new()
 	noise.seed = ProjectSettings.get_setting("shader_globals/seed").value
 	texture.noise = noise
-	await texture.changed
-	print("terrain")

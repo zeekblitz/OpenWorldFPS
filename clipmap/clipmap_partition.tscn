@@ -10,6 +10,6 @@ shader = ExtResource("1_as87i")
 [node name="Partition" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0665827)
 material_override = SubResource("ShaderMaterial_wlro5")
-extra_cull_margin = 512.0
+extra_cull_margin = 50.0
 skeleton = NodePath("../..")
 script = ExtResource("2_mry86")

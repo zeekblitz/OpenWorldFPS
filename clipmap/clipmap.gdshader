@@ -32,31 +32,41 @@ void vertex(){
 	float subdivision_length = min(pow(2,lod), clipmap_partition_length);
 	
 	vec3 fraction = fract((VERTEX + clipmap_partition_length / 2.0) / subdivision_length);
-
-//	VERTEX.y = mix(
-//		mix(
-//			get_height(world_vertex - vec3(fraction.x * subdivision_length, 0, 0)), 
-//			get_height(world_vertex + vec3((1.0-fraction.x) * subdivision_length, 0, 0)), 
-//			fraction.x
-//		), 
-//		mix(
-//			get_height(world_vertex - vec3(0, 0, fraction.z * subdivision_length)), 
-//			get_height(world_vertex + vec3(0, 0, (1.0-fraction.z) * subdivision_length)), 
-//			fraction.z
-//		), 
-//		ceil(fraction.z)
-//	);
-	if (fraction.z == 0.5){
-		dev_albedo = vec3(0,0,1);
-		VERTEX.y = mix(
+	
+	//if (fraction.x == 0.5){
+		//dev_albedo = vec3(1,0,0);
+		//VERTEX.y = mix(
+			//get_height(world_vertex - vec3(fraction.x * subdivision_length, 0, 0)), 
+			//get_height(world_vertex + vec3((1.0-fraction.x) * subdivision_length, 0, 0)), 
+			//fraction.x
+		//);
+	//}
+	//
+	//if (fraction.z == 0.5){
+		//dev_albedo = vec3(0,0,1);
+		//VERTEX.y = mix(
+			//get_height(world_vertex - vec3(0, 0, fraction.z * subdivision_length)), 
+			//get_height(world_vertex + vec3(0, 0, (1.0-fraction.z) * subdivision_length)), 
+			//fraction.z
+		//);
+	//}
+	
+	VERTEX.y = mix(
+		mix(
+			get_height(world_vertex - vec3(fraction.x * subdivision_length, 0, 0)), 
+			get_height(world_vertex + vec3((1.0-fraction.x) * subdivision_length, 0, 0)), 
+			fraction.x
+		), 
+		mix(
 			get_height(world_vertex - vec3(0, 0, fraction.z * subdivision_length)), 
 			get_height(world_vertex + vec3(0, 0, (1.0-fraction.z) * subdivision_length)), 
 			fraction.z
-		);
-	}
+		), 
+		ceil(fraction.z)
+	);
 }
 
 void fragment() {
 	NORMAL_MAP = texture(normalmap,normalmap_position).rgb;
-	ALBEDO = dev_albedo;
+	//ALBEDO = dev_albedo;
 }

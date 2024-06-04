@@ -6,8 +6,7 @@ var z = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	print("part x = %d z = %d" % [x, z])
+	#print("part x = %d z = %d" % [x, z])
 	var material : ShaderMaterial = self.get_active_material(0)
 	material.set_shader_parameter("heightmap", texture)
 	
@@ -16,7 +15,6 @@ func _ready():
 	
 	mesh = PlaneMesh.new()
 	mesh.size = Vector2.ONE * length
-	
 	position = Vector3(x,0,z) * length
 	
 	var lod = max(abs(x),abs(z)) * lod_step
@@ -24,6 +22,3 @@ func _ready():
 	var subdivides = max(length/subdivision_length - 1, 0)
 	mesh.subdivide_width = subdivides
 	mesh.subdivide_depth = subdivides
-	
-	
-	
