@@ -1,15 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2esxayut1lwe"]
+[gd_scene load_steps=7 format=3 uid="uid://d2esxayut1lwe"]
 
 [ext_resource type="Shader" path="res://terrain/clipmap/clipmap.gdshader" id="1_0bi3i"]
 [ext_resource type="Script" path="res://terrain/clipmap/clipmap_partition.gd" id="2_rlef3"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u6twq"]
+seed = 69420
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l0fxu"]
+seamless = true
+noise = SubResource("FastNoiseLite_u6twq")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wlro5"]
 render_priority = 0
 shader = ExtResource("1_0bi3i")
+shader_parameter/heightmap = SubResource("NoiseTexture2D_l0fxu")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n0dyp"]
+size = Vector2(64, 64)
+subdivide_width = 63
+subdivide_depth = 63
 
 [node name="Partition" type="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0665827)
 material_override = SubResource("ShaderMaterial_wlro5")
-extra_cull_margin = 50.0
+extra_cull_margin = 15.0
+mesh = SubResource("PlaneMesh_n0dyp")
 skeleton = NodePath("../..")
 script = ExtResource("2_rlef3")

@@ -1,3 +1,4 @@
+@tool
 extends StaticBody3D
 
 var texture : NoiseTexture2D

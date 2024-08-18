@@ -2,6 +2,7 @@ shader_type spatial;
 //render_mode wireframe;
 
 uniform sampler2D heightmap;
+
 global uniform float amplitude;
 global uniform vec3 clipmap_position;
 global uniform float clipmap_partition_length;
@@ -89,6 +90,9 @@ void vertex(){
 		), 
 		ceil(fraction.z)
 	);
+	
+	//normalize(VERTEX);
+	
 	
 	//NORMAL = get_normal(VERTEX, float(subdivision_length));
 	vert = world_vertex;

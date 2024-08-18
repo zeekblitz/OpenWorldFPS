@@ -1,11 +1,15 @@
 extends CharacterBody3D
+
 @export var speed = 10.0
 @export var jump_velocity = 4.5
-@export var gravity_enabled = false
+@export var gravity_enabled = true
+
 var look_sensitivity = ProjectSettings.get_setting("player/look_sensitivity")
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var velocity_y = 0
+
 @onready var camera:Camera3D = $Camera3d
+
 func _physics_process(delta):
 	if gravity_enabled:
 		var horizontal_velocity = Input.get_vector("move_left","move_right","move_forward","move_backward").normalized() * speed
@@ -24,9 +28,15 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("ui_cancel"): 
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE else Input.MOUSE_MODE_VISIBLE
+	
+	if Input.is_action_just_pressed("gravity"):
+		gravity_enabled = !gravity_enabled
+		if (gravity_enabled == false):
+			speed = 50.0
+		else: speed = 10.0
+
 func _input(event):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * look_sensitivity)
 		camera.rotate_x(-event.relative.y * look_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
-
